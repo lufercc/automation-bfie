@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
-import java.sql.SQLOutput;
 
 public class Seleniumhook {
     WebDriver driver;
@@ -26,6 +25,23 @@ public class Seleniumhook {
         driver.findElement(By.cssSelector("#user-name")).sendKeys("problem_user");
         driver.findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
         driver.findElement(By.cssSelector("#login-button")).click();
+        boolean baner = driver.findElement(By.cssSelector(".app_logo")).isDisplayed();
+        boolean inventoryList = driver.findElement(By.cssSelector(".inventory_list")).isDisplayed();
+        assert baner;
+        assert inventoryList;
+    }
+
+    @Test
+    public void souceDemoAddItemToCart() {
+        String itemName = "Sauce Labs Onesie";
+        String itemLocator = "//div[contains(text(),'"+itemName+"')]//ancestor::div[@class='inventory_item_description']//button";
+        System.out.println("TEST1");
+        driver.get("https://www.saucedemo.com/");
+        driver.findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
+        driver.findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
+        driver.findElement(By.cssSelector("#login-button")).click();
+//        driver.findElement(By.cssSelector("#add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.xpath(itemLocator)).click();
     }
 
     @AfterMethod
@@ -40,5 +56,4 @@ public class Seleniumhook {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
-
 }
