@@ -14,6 +14,11 @@ public class ProductPage {
     static String ADD_PRODUCT_LOCATOR = "//div[contains(text(),'ITEM_NAME')]//ancestor::div[@class='inventory_item_description']//button[contains(@data-test, 'add')]";
     static String REMOVE_PRODUCT_LOCATOR = "//div[contains(text(),'ITEM_NAME')]//ancestor::div[@class='inventory_item_description']//button[contains(@data-test, 'remove')]";
 
+    static String PRICE_PRODUCT_LOCATOR = "//div[contains(text(),'ITEM_NAME')]//ancestor::div[@class='inventory_item_description']//div[@class='inventory_item_price']";
+
+    @FindBy(css = ".shopping_cart_container")
+    private WebElement cart_container;
+
     @FindBy(css = ".shopping_cart_badge")
     private WebElement quantity_items;
 
@@ -36,5 +41,15 @@ public class ProductPage {
 
     public String getQuantityItems(){
         return quantity_items.getText();
+    }
+
+    public void goCartPage(){
+        cart_container.click();
+    }
+
+    public String getPriceProduct(String productName){
+        String itemLocator = PRICE_PRODUCT_LOCATOR.replace("ITEM_NAME", productName);
+        String priceString = driver.findElement(By.xpath(itemLocator)).getText();
+        return priceString.replaceAll("[^\\.123456789]", "");
     }
 }

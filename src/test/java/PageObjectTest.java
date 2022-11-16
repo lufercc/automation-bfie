@@ -1,22 +1,20 @@
 import core_ui.DriverManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pageobject.CartPage;
 import pageobject.LoginPage;
 import pageobject.ProductPage;
+
+import java.text.DecimalFormat;
 
 public class PageObjectTest {
 
     @AfterMethod
-    public void otherafter(){
+    public void otherafter() {
         System.out.println("AFTER METH");
         DriverManager.getInstance().quitDriver();
     }
-
 
     @Test
     public void souceDemoAddItemToCart() {
@@ -43,4 +41,28 @@ public class PageObjectTest {
         String current2 = productPage.getQuantityItems();
         assert current2.equalsIgnoreCase("2");
     }
+
+    @Test
+    public void checkoutProducts() {
+        LoginPage loginPage = new LoginPage();
+        ProductPage productPage = new ProductPage();
+        CartPage cartPage = new CartPage();
+        loginPage.login("standard_user", "secret_sauce");
+        String onesiePrice = productPage.getPriceProduct("Sauce Labs Onesie");
+        productPage.addProductToCart("Sauce Labs Onesie");
+        String jacketPrice = productPage.getPriceProduct("Fleece Jacket");
+        productPage.addProductToCart("Fleece Jacket");
+        productPage.goCartPage();
+        cartPage.doCheckoutBtn();
+        cartPage.setForm();
+        String subtotal = cartPage.getSubtotal();
+
+        //DecimalFormat df = new DecimalFormat("0.00");
+        float total = Float.parseFloat(onesiePrice) + Float.parseFloat(jacketPrice);
+        float subtotalFloat = Float.parseFloat(subtotal);
+
+        Assert.assertEquals(total, subtotalFloat,0.004);
+        //assert subtotal.substring(0,2).compareTo(total);
+    }
+
 }
