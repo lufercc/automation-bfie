@@ -1,10 +1,10 @@
-package pageobject;
+package com.fie.pageobject;
 
-import core_ui.DriverManager;
+import com.fie.core_ui.DriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -21,6 +21,9 @@ public class ProductPage {
 
     @FindBy(css = ".shopping_cart_badge")
     private WebElement quantity_items;
+
+    @FindBy(css = ".app_logo")
+    private WebElement bannerElement;
 
 
     public ProductPage(){
@@ -52,4 +55,14 @@ public class ProductPage {
         String priceString = driver.findElement(By.xpath(itemLocator)).getText();
         return priceString.replaceAll("[^\\.123456789]", "");
     }
+
+    public boolean isBannerDisplayed() {
+        try {
+            return bannerElement.isDisplayed();
+        }
+        catch (NoSuchElementException e){
+            return false;
+        }
+    }
+
 }

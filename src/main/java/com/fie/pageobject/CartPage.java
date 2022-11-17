@@ -1,6 +1,6 @@
-package pageobject;
+package com.fie.pageobject;
 
-import core_ui.DriverManager;
+import com.fie.core_ui.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

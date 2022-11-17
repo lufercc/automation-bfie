@@ -1,7 +1,6 @@
-package pageobject;
+package com.fie.pageobject;
 
-import core_ui.DriverManager;
-import org.openqa.selenium.By;
+import com.fie.core_ui.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

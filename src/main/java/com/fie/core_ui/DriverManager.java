@@ -1,4 +1,4 @@
-package core_ui;
+package com.fie.core_ui;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

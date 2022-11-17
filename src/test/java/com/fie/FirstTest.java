@@ -1,3 +1,6 @@
+package com.fie;
+
+import com.fie.UnderTest;
 import org.testng.annotations.Test;
 
 public class FirstTest {
