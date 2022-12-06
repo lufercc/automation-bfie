@@ -3,6 +3,7 @@ package com.fie.core_ui;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverManager {
     private static DriverManager instance = null;
@@ -18,13 +19,16 @@ public class DriverManager {
     }
     public WebDriver getDriver(){
         if(driver == null){
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--headless");
+            driver = new ChromeDriver(chromeOptions);
+            driver.manage().window().maximize();
         }
         return driver;
     }
 
     public void quitDriver(){
         driver.quit();
+        driver = null;
     }
 }

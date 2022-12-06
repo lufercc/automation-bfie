@@ -35,6 +35,8 @@ public class ProductPage {
     public void addProductToCart(String productName){
         String itemLocator = ADD_PRODUCT_LOCATOR.replace("ITEM_NAME", productName);
         driver.findElement(By.xpath(itemLocator)).click();
+
+
     }
 
     public void removeProductToCart(String productName){

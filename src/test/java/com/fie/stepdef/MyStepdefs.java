@@ -51,4 +51,8 @@ public class MyStepdefs {
     @Given("TEStetste {string}")
     public void testetste(String arg0) {
     }
+
+    @Given("I do nothing")
+    public void iDoNothing() {
+    }
 }

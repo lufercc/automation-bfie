@@ -1,4 +1,5 @@
 Feature: I want Login to Souce Demo app
+  @soucedemo
   Scenario: I Login to souce Demo app
     Given I open Chome
     And I go to "https://www.saucedemo.com/"

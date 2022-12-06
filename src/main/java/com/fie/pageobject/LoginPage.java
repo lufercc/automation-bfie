@@ -26,7 +26,7 @@ public class LoginPage {
 
 
     public void login(String user, String password){
-        openBrowser();
+//        openBrowser();
         userInput.sendKeys(user);
         passwordInput.sendKeys(password);
         loginButton.click();
